@@ -1,4 +1,4 @@
-name: terraform deploy to aws
+name: Terraform VPC Deployment
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./  # 👈 ensure you run in the root folder with .tf files
+        working-directory: modules/vpc  # 👈 Set correct path
 
     steps:
       - name: Checkout code
@@ -25,10 +25,10 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var-file="terraform.tfvars"
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var-file="terraform.tfvars"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
