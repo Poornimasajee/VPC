@@ -1,9 +1,5 @@
-variable "region" {
-  default = "eu-west-1"
-}
-
 variable "vpc_name" {
-  default = "modular-vpc"
+  default = "poorni-vpc"
 }
 
 variable "vpc_cidr" {
